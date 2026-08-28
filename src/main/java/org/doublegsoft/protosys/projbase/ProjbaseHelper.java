@@ -23,7 +23,7 @@ public class ProjbaseHelper {
     List<String> retVal = new ArrayList<>();
     List<File> files = listFiles(rootdir);
     for (File f : files) {
-      retVal.add(f.getName().replaceAll(appRoot + "/", ""));
+      retVal.add(dir + "/" + f.getName().replaceAll(appRoot + "/", ""));
     }
     return retVal;
   }
