@@ -31,7 +31,7 @@ public class ProjbaseHelper {
 
   private List<File> listFiles(File dir) {
     List<File> retVal = new ArrayList<>();
-    if (dir == null) {
+    if (dir == null || dir.listFiles() == null) {
       return retVal;
     }
     for (File f : dir.listFiles()) {
