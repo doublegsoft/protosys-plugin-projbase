@@ -12,24 +12,28 @@ import java.util.List;
  */
 public class ProjbaseHelper {
 
-  private final String outputRoot;
+  private final String appRoot;
 
-  public ProjbaseHelper(String root, String appname) {
-    this.outputRoot = root + "/" + appname;
+  public ProjbaseHelper(String output) {
+    this.appRoot = output;
   }
 
   public List<String> listFiles(String dir) {
-    File rootdir = new File(outputRoot, dir);
+    System.out.println(appRoot);
+    File rootdir = new File(appRoot, dir);
     List<String> retVal = new ArrayList<>();
     List<File> files = listFiles(rootdir);
     for (File f : files) {
-      retVal.add(f.getName().replaceAll(outputRoot + "/", ""));
+      retVal.add(f.getName().replaceAll(appRoot + "/", ""));
     }
     return retVal;
   }
 
   private List<File> listFiles(File dir) {
     List<File> retVal = new ArrayList<>();
+    if (dir == null) {
+      return retVal;
+    }
     for (File f : dir.listFiles()) {
       if (f.getName().equals(".") || f.getName().equals("..")) {
         continue;

@@ -193,7 +193,7 @@ public class ProjbasePlugin extends FileSystemTemplateBasedPlugin {
       license = new String(Files.readAllBytes(new File(licensePath).toPath()), "UTF-8");
       globalVars.set("license", license);
     }
-    globalVars.put("helper", new ProjbaseHelper(outputRoot, globalVars.get("application")));
+    globalVars.put("helper", new ProjbaseHelper(outputRoot));
     ProjbasePlugin projbase = new ProjbasePlugin();
     try {
       projbase.prototype(
