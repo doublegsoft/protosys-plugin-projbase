@@ -19,7 +19,6 @@ public class ProjbaseHelper {
   }
 
   public List<String> listFiles(String dir) {
-    System.out.println(appRoot);
     File rootdir = new File(appRoot, dir);
     List<String> retVal = new ArrayList<>();
     List<File> files = listFiles(rootdir);
