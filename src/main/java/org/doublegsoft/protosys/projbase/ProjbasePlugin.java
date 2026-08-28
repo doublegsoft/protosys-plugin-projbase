@@ -52,39 +52,6 @@ public class ProjbasePlugin extends FileSystemTemplateBasedPlugin {
     if (Strings.isBlank(guidbaseSource)) {
       return retVal;
     }
-//    List<GuidbaseContext> guicctxs = GuidbaseContext.from(guidbaseSource);
-//
-//    for (GuidbaseContext guicctx : guicctxs) {
-//      String module = guicctx.page().attr("module");
-//      if (module == null) {
-//        module = "unknown";
-//      }
-//      if (retVal.getName() == null) {
-//        if (module.indexOf("/") == -1) {
-//          retVal.setName(module);
-//        } else {
-//          retVal.setName(module.substring(0, module.indexOf("/")));
-//        }
-//      }
-//      UsecaseDefinition usecase = new UsecaseDefinition(guicctx.page().id());
-//      usecase.setModule(module);
-//
-//      PageDefinition pagedef = new PageDefinition(module);
-//      pagedef.setId(guicctx.page().id());
-//      pagedef.setType("page");
-//      pagedef.setModule(module);
-//      pagedef.setName(guicctx.page().id());
-//      pagedef.setTitle(guicctx.page().attr("title"));
-//      pagedef.setPosition(Position.at(guicctx.page().attr("position")));
-//      guicctx.page().attrs().forEach(attr -> {
-//        pagedef.addOption(attr.name(), attr.value());
-//      });
-//      for (GuidbaseWidget widget : guicctx.page().children()) {
-//        pagedef.addWidget(convertToWidget(widget, pagedef));
-//      }
-////      usecase.setPage(pagedef);
-//      retVal.addUsecase(usecase);
-//    }
     return retVal;
   }
 
@@ -177,41 +144,6 @@ public class ProjbasePlugin extends FileSystemTemplateBasedPlugin {
     renderTo(outputRoot, outputPath, outputName, tmlpath, tmlname, model);
   }
 
-  public Set<String> getTriggerComponents() throws Exception {
-    Set<String> retVal = new HashSet<>();
-    for (UsecaseDefinition usecase : application.getUsecases()) {
-//      for (WidgetDefinition widget : usecase.getPage().getPageWidgets()) {
-//        String trigger = widget.getOption("trigger");
-//        if (trigger != null) {
-//          Invocation invo = (Invocation) Ablang.statements(trigger).get(0);
-//          retVal.add(invo.getComponent().getName());
-//        }
-//        String create = widget.getOption("create");
-//        if (create != null) {
-//          Invocation invo = (Invocation) Ablang.statements(create).get(0);
-//          retVal.add(invo.getComponent().getName());
-//        }
-//      }
-    }
-    return retVal;
-  }
-
-  /**
-   * Gets the using builtin components of an application used in the templates.
-   *
-   * @return the component names
-   *
-   * @throws Exception
-   *        in case of any errors
-   */
-  public Set<String> getComponentNames() throws Exception {
-    Set<String> retVal = new HashSet<>();
-    for (UsecaseDefinition usecase : application.getUsecases()) {
-      // retVal.addAll(getComponentNames(usecase.getPage()));
-    }
-    return retVal;
-  }
-
   public static void main(String[] args) throws Exception {
     Options options = new Options();
 
@@ -261,7 +193,7 @@ public class ProjbasePlugin extends FileSystemTemplateBasedPlugin {
       license = new String(Files.readAllBytes(new File(licensePath).toPath()), "UTF-8");
       globalVars.set("license", license);
     }
-
+    globalVars.put("helper", new ProjbaseHelper(outputRoot, globalVars.get("application")));
     ProjbasePlugin projbase = new ProjbasePlugin();
     try {
       projbase.prototype(
