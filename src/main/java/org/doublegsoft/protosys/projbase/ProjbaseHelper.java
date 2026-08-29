@@ -28,19 +28,22 @@ public class ProjbaseHelper {
     return retVal;
   }
 
-  public List<String> listThirdParties(String dir) {
+  public List<ThirdParty> listThirdParties(String dir) {
     File rootdir = new File(appRoot, dir);
-    List<String> retVal = new ArrayList<>();
+    List<ThirdParty> retVal = new ArrayList<>();
     for (File f : rootdir.listFiles()) {
       if (f.getName().equals(".") || f.getName().equals("..") || !f.isDirectory()) {
         continue;
       }
+      ThirdParty tp = new ThirdParty();
       String name = f.getName();
       String projname = name;
       if (name.contains("-")) {
         projname = name.substring(0, name.lastIndexOf("-"));
+        tp.setVersion(name.substring(name.lastIndexOf("-") + 1));
       }
-      retVal.add(projname);
+      tp.setName(projname);
+      retVal.add(tp);
     }
     return retVal;
   }
