@@ -1,0 +1,92 @@
+glibc:
+  - c
+
+musl:
+  - c
+
+glib:
+  - glib-2.0
+  - gobject-2.0
+
+libuv:
+  - uv
+
+libevent:
+  - event
+
+openssl:
+  - ssl
+  - crypto
+
+mbedtls:
+  - mbedtls
+  - mbedcrypto
+  - mbedx509
+
+wolfssl:
+  - wolfssl
+
+libsodium:
+  - sodium
+
+zlib:
+  - z
+
+zstd:
+  - zstd
+
+lz4:
+  - lz4
+
+bzip2:
+  - bz2
+
+libarchive:
+  - archive
+
+sqlite:
+  - sqlite3
+
+hiredis:
+  - hiredis
+
+berkeley-db:
+  - db
+
+curl:
+  - curl
+
+libwebsockets:
+  - websockets
+
+paho-mqtt-c:
+  - paho-mqtt3c
+  - paho-mqtt3a
+
+ffmpeg:
+  - avcodec
+  - avformat
+  - avutil
+  - swscale
+  - avfilter
+
+libpng:
+  - png
+
+libjpeg-turbo:
+  - jpeg
+
+freetype:
+  - freetype
+
+cjson:
+  - cjson
+
+jansson:
+  - jansson
+
+libxml2:
+  - xml2
+
+pcre2:
+  - pcre2-8
