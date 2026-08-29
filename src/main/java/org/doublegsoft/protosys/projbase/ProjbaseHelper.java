@@ -28,6 +28,23 @@ public class ProjbaseHelper {
     return retVal;
   }
 
+  public List<String> listThirdParties(String dir) {
+    File rootdir = new File(appRoot, dir);
+    List<String> retVal = new ArrayList<>();
+    for (File f : rootdir.listFiles()) {
+      if (f.getName().equals(".") || f.getName().equals("..") || !f.isDirectory()) {
+        continue;
+      }
+      String name = f.getName();
+      String projname = name;
+      if (name.contains("-")) {
+        projname = name.substring(0, name.lastIndexOf("-"));
+      }
+      retVal.add(projname);
+    }
+    return retVal;
+  }
+
   private List<File> listFiles(File dir) {
     List<File> retVal = new ArrayList<>();
     if (dir == null || dir.listFiles() == null) {
