@@ -21,6 +21,9 @@ public class ProjbaseHelper {
   public List<String> listFiles(String dir) {
     File rootdir = new File(appRoot, dir);
     List<String> retVal = new ArrayList<>();
+    if (!rootdir.exists()) {
+      return retVal;
+    }
     List<File> files = listFiles(rootdir);
     for (File f : files) {
       retVal.add(dir + "/" + f.getName().replaceAll(appRoot + "/", ""));
@@ -31,6 +34,9 @@ public class ProjbaseHelper {
   public List<ThirdParty> listThirdParties(String dir) {
     File rootdir = new File(appRoot, dir);
     List<ThirdParty> retVal = new ArrayList<>();
+    if (!rootdir.exists()) {
+      return retVal;
+    }
     for (File f : rootdir.listFiles()) {
       if (f.getName().equals(".") || f.getName().equals("..") || !f.isDirectory()) {
         continue;
@@ -50,7 +56,7 @@ public class ProjbaseHelper {
 
   private List<File> listFiles(File dir) {
     List<File> retVal = new ArrayList<>();
-    if (dir == null || dir.listFiles() == null) {
+    if (dir == null || !dir.exists() || dir.listFiles() == null) {
       return retVal;
     }
     for (File f : dir.listFiles()) {
