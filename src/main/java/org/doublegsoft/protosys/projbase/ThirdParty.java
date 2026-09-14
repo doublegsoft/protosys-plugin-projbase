@@ -14,6 +14,8 @@ public class ThirdParty {
 
   private String version;
 
+  private String group;
+
   private final List<String> libraries = new ArrayList<>();
 
   public String getName() {
@@ -34,6 +36,14 @@ public class ThirdParty {
 
   public List<String> getLibraries() {
     return getLibraries("c");
+  }
+
+  public String getGroup() {
+    return group;
+  }
+
+  public void setGroup(String group) {
+    this.group = group;
   }
 
   public List<String> getLibraries(String language) {

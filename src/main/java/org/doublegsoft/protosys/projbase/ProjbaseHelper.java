@@ -1,8 +1,11 @@
 package org.doublegsoft.protosys.projbase;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * TODO: ADD DESCRIPTION
@@ -67,6 +70,33 @@ public class ProjbaseHelper {
         retVal.addAll(listFiles(f));
       } else {
         retVal.add(f);
+      }
+    }
+    return retVal;
+  }
+
+  public List<ThirdParty> parseThirdParties(String dir) throws IOException {
+    List<ThirdParty> retVal = new ArrayList<>();
+    File rootdir = new File(appRoot, dir);
+    if (!rootdir.exists()) {
+      return retVal;
+    }
+    for (File f : rootdir.listFiles()) {
+      if (!f.isFile()) {
+        continue;
+      }
+      List<String> lines = Files.readAllLines(f.toPath());
+      for (String line : lines) {
+        if (line.trim().isEmpty()) {
+          continue;
+        }
+        line = line.trim();
+        String[] strs = line.split(":");
+        ThirdParty tp = new ThirdParty();
+        tp.setGroup(strs[0]);
+        tp.setName(strs[1]);
+        tp.setVersion(strs[2]);
+        retVal.add(tp);
       }
     }
     return retVal;
