@@ -21,7 +21,7 @@ public class ProjbaseHelper {
     this.appRoot = output;
   }
 
-  public List<String> listFiles(String dir) {
+  public List<String> listFiles(String dir) throws IOException {
     File rootdir = new File(appRoot, dir);
     List<String> retVal = new ArrayList<>();
     if (!rootdir.exists()) {
@@ -29,7 +29,14 @@ public class ProjbaseHelper {
     }
     List<File> files = listFiles(rootdir);
     for (File f : files) {
-      retVal.add(dir + "/" + f.getName().replaceAll(appRoot + "/", ""));
+      String path = f.getAbsolutePath().replaceAll(rootdir.getAbsolutePath(), "");
+      if (path.endsWith("/")) {
+        path = path.substring(0, path.length() - 1);
+      }
+      if (path.startsWith("/")) {
+        path = path.substring(1);
+      }
+      retVal.add(path);
     }
     return retVal;
   }
